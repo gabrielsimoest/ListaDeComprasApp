@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.ListaDeComprasApp" parent="Base.Theme.ListaDeComprasApp" />
+
+    <style name="Theme.ListaDeComprasApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ListaDeComprasApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ListaDeComprasApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

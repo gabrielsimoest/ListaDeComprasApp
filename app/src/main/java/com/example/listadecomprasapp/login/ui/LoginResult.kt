@@ -1,4 +1,4 @@
-package com.example.listadecomprasapp.ui.login
+package com.example.listadecomprasapp.login.ui
 
 /**
  * Authentication result : success (user details) or error message.

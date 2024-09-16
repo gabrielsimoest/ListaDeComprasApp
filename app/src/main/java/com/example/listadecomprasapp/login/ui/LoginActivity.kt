@@ -1,4 +1,4 @@
-package com.example.listadecomprasapp.ui.login
+package com.example.listadecomprasapp.login.ui
 
 import android.app.Activity
 import androidx.lifecycle.Observer

@@ -1,6 +1,6 @@
-package com.example.listadecomprasapp.data
+package com.example.listadecomprasapp.login.data
 
-import com.example.listadecomprasapp.data.model.LoggedInUser
+import com.example.listadecomprasapp.login.data.model.LoggedInUser
 import java.io.IOException
 
 /**
