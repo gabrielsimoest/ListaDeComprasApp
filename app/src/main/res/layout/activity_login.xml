@@ -17,7 +17,8 @@
         android:src="@mipmap/icon_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/logo_description"/>
 
     <EditText
         android:id="@+id/username"
