@@ -19,7 +19,6 @@ class AccountActivity : AppCompatActivity() {
         binding = ActivityAccountBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
 
     }
 

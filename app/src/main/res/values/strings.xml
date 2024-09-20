@@ -4,7 +4,7 @@
     <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in_short">Entrar</string>
-    <string name="action_sign_in">Entrar ou Registrar</string>
+    <string name="action_sign_in">Entrar</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="welcome">"Bem Vindo !"</string>
@@ -12,4 +12,7 @@
     <string name="invalid_password">A senha deve conter mais de 5 caracteres</string>
     <string name="login_failed">O Login Falhou!</string>
     <string name="create_account">Criar Conta</string>
+    <string name="forgot_password">Esqueceu a Senha?</string>
+    <string name="login_subtitle">Entre com sua conta</string>
+
 </resources>
