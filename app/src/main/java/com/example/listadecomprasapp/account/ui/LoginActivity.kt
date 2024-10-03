@@ -16,10 +16,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.listadecomprasapp.R
 import com.example.listadecomprasapp.databinding.ActivityLoginBinding
 import com.example.listadecomprasapp.shoppinglist.ui.ListsHomeActivity
+import com.example.listadecomprasapp.user.UserDAO
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    @Inject
+    lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +43,6 @@ class LoginActivity : AppCompatActivity() {
         val password = binding.password
         val login = binding.login
         val loading = binding.loading
-
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer

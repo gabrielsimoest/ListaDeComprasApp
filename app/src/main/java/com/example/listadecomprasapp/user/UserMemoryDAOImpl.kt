@@ -3,17 +3,25 @@ package com.example.listadecomprasapp.user
 import com.example.listadecomprasapp.user.model.User
 
 class UserMemoryDAOImpl : UserDAO {
-    private val userList: MutableList<User> = ArrayList()
+    private val userList: MutableList<User> = mutableListOf()
 
-    override fun createUser(user: User) : Int {
-        val id = userList.size + 1;
+    override fun createUser(user: User): Int {
+        if (userList.any { it.email == user.email }) {
+            throw IllegalArgumentException("User with email ${user.email} already exists.")
+        }
+
+        val id = userList.size + 1
         val newUser = user.copy(id = id)
         userList.add(newUser)
 
         return id
     }
 
-    override fun getUser(id: Int) : User? {
+    override fun getUser(id: Int): User? {
         return userList.find { it.id == id }
+    }
+
+    override fun getUser(email: String, password: String): User? {
+        return userList.find { it.email == email && it.password == password }
     }
 }

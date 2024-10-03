@@ -1,13 +1,14 @@
 package com.example.listadecomprasapp.account.data
 
 import com.example.listadecomprasapp.account.data.model.LoggedInUser
+import com.example.listadecomprasapp.user.UserDAO
 
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository(val dataSource: LoginDataSource) {
+class LoginRepository(private val userDAO: UserDAO) {
 
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
@@ -24,18 +25,22 @@ class LoginRepository(val dataSource: LoginDataSource) {
 
     fun logout() {
         user = null
-        dataSource.logout()
     }
 
     fun login(username: String, password: String): Result<LoggedInUser> {
-        // handle login
-        val result = dataSource.login(username, password)
+        val user = userDAO.getUser(username, password)
 
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
+        return if (user != null) {
+            val loggedInUser = LoggedInUser(
+                userId = user.id,
+                displayName = user.name
+            )
+
+            setLoggedInUser(loggedInUser)
+            Result.Success(loggedInUser)
+        } else {
+            Result.Error(exception = Exception("Usuário ou senha inválidos"))
         }
-
-        return result
     }
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {
