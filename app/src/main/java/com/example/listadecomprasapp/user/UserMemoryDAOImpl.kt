@@ -7,7 +7,7 @@ class UserMemoryDAOImpl : UserDAO {
 
     override fun createUser(user: User): Int {
         if (userList.any { it.email == user.email }) {
-            throw IllegalArgumentException("User with email ${user.email} already exists.")
+            throw IllegalArgumentException("Usuário com o email: ${user.email} já existente!.")
         }
 
         val id = userList.size + 1

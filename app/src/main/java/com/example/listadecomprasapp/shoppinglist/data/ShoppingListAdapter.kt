@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.listadecomprasapp.R
 import com.example.listadecomprasapp.shoppinglist.data.model.ShoppingListModel
 
-class ListHomeAdapter(private val listener: OnListClickListener) : RecyclerView.Adapter<ListHomeAdapter.ItemViewHolder>() {
+class ShoppingListAdapter(private val listener: OnListClickListener) : RecyclerView.Adapter<ShoppingListAdapter.ItemViewHolder>() {
     private val itemList: MutableList<ShoppingListModel> = ArrayList()
 
     fun addItem(item: ShoppingListModel) {

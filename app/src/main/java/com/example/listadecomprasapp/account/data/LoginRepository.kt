@@ -3,14 +3,8 @@ package com.example.listadecomprasapp.account.data
 import com.example.listadecomprasapp.account.data.model.LoggedInUser
 import com.example.listadecomprasapp.user.UserDAO
 
-/**
- * Class that requests authentication and user information from the remote data source and
- * maintains an in-memory cache of login status and user credentials information.
- */
-
 class LoginRepository(private val userDAO: UserDAO) {
 
-    // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
         private set
 
@@ -18,8 +12,6 @@ class LoginRepository(private val userDAO: UserDAO) {
         get() = user != null
 
     init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
         user = null
     }
 
@@ -45,7 +37,5 @@ class LoginRepository(private val userDAO: UserDAO) {
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {
         this.user = loggedInUser
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
     }
 }

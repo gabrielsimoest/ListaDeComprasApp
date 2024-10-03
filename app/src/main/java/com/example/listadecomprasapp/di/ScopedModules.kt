@@ -22,12 +22,6 @@ abstract class ScopedModules {
         fun providesLoginViewModel(loginRepository: LoginRepository): LoginViewModel {
             return LoginViewModel(loginRepository)
         }
-
-        @Provides
-        @ActivityRetainedScoped
-        fun providesLoginRepository(userDAO: UserDAO): LoginRepository {
-            return LoginRepository(userDAO)
-        }
     }
 
 }

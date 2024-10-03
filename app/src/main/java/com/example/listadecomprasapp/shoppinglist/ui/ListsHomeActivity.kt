@@ -6,14 +6,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.listadecomprasapp.databinding.ActivityListsHomeBinding
-import com.example.listadecomprasapp.shoppinglist.data.ListHomeAdapter
+import com.example.listadecomprasapp.shoppinglist.data.ShoppingListAdapter
 import com.example.listadecomprasapp.shoppinglist.data.OnListClickListener
 import com.example.listadecomprasapp.shoppinglist.data.model.ShoppingListModel
 
 class ListsHomeActivity : AppCompatActivity(), OnListClickListener {
 
     private lateinit var binding: ActivityListsHomeBinding
-    private lateinit var listHomeAdapter: ListHomeAdapter
+    private lateinit var shoppingListAdapter: ShoppingListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +22,13 @@ class ListsHomeActivity : AppCompatActivity(), OnListClickListener {
         setContentView(binding.root)
 
         binding.itemsList.layoutManager = GridLayoutManager(this, 2)
-        listHomeAdapter = ListHomeAdapter(this)
-        binding.itemsList.adapter = listHomeAdapter
+        shoppingListAdapter = ShoppingListAdapter(this)
+        binding.itemsList.adapter = shoppingListAdapter
 
         binding.addButton.setOnClickListener {
-            val newIdList = listHomeAdapter.itemCount + 1;
+            val newIdList = shoppingListAdapter.itemCount + 1;
             val newList = ShoppingListModel(id = newIdList, name = "Item de Exemplo " + newIdList)
-            listHomeAdapter.addItem(newList)
+            shoppingListAdapter.addItem(newList)
         }
 
         binding.addList.setOnClickListener {
