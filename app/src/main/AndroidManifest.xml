@@ -3,32 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".di.MyApplication"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.ListaDeComprasApp"
         tools:targetApi="31">
         <activity
-            android:name=".list.ui.EditItemActivity"
+            android:name=".shoppinglist.ui.EditItemActivity"
             android:exported="false"
             android:theme="@style/Theme.ListaDeComprasApp" />
         <activity
-            android:name=".list.ui.EditListActivity"
+            android:name=".shoppinglist.ui.EditListActivity"
             android:exported="false"
             android:theme="@style/Theme.ListaDeComprasApp" />
         <activity
-            android:name=".list.ui.ListActivity"
+            android:name=".shoppinglist.ui.ListActivity"
             android:exported="false" />
         <activity
-            android:name=".home.ui.HomeActivity"
+            android:name=".shoppinglist.ui.ListsHomeActivity"
             android:exported="false"
             android:theme="@style/Theme.ListaDeComprasApp" />
         <activity
-            android:name=".account.ui.AccountActivity"
+            android:name=".account.ui.CreateUserActivity"
             android:exported="false"
             android:theme="@style/Theme.ListaDeComprasApp" />
         <activity
-            android:name=".login.ui.LoginActivity"
+            android:name=".account.ui.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize" />

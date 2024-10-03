@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".CreateAccountActivity">
+    tools:context=".account.ui.CreateUserActivity">
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -83,6 +83,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:text="Criar Conta"
+        app:backgroundTint="#f8856a"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword" />

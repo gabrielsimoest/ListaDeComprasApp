@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EDE7F6"
-    tools:context=".list.ui.EditItemActivity">
+    tools:context=".shoppinglist.ui.EditItemActivity">
 
     <TextView
         android:id="@+id/titulo"
