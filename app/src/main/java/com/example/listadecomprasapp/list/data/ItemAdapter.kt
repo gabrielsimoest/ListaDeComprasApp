@@ -1,4 +1,4 @@
-package com.example.listadecomprasapp.home.data
+package com.example.listadecomprasapp.list.data
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,16 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listadecomprasapp.R
-import com.example.listadecomprasapp.home.data.ItemAdapter.ItemViewHolder
+import com.example.listadecomprasapp.home.data.OnListClickListener
 
-class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
-    private val itemList: MutableList<String> =
-        ArrayList() // Inicializar a lista de itens
+class ItemAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+    private val itemList: MutableList<ItemModel> = ArrayList()
 
-    // Adiciona um item à lista e notifica o RecyclerView
-    fun addItem(item: String) {
+    fun addItem(item: ItemModel) {
         itemList.add(item)
-        notifyItemInserted(itemList.size - 1) // Notifica a inserção de um item
+        notifyItemInserted(itemList.size - 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -26,7 +24,11 @@ class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = itemList[position]
-        holder.textView.text = currentItem
+        holder.textView.text = currentItem.name
+
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(currentItem)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -34,6 +36,6 @@ class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
     }
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var textView: TextView = itemView.findViewById(R.id.item_text)
+        var textView: TextView = itemView.findViewById(R.id.textViewName)
     }
 }
