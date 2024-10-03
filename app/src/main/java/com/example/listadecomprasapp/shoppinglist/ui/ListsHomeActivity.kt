@@ -5,15 +5,26 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.listadecomprasapp.account.data.LoginRepository
 import com.example.listadecomprasapp.databinding.ActivityListsHomeBinding
 import com.example.listadecomprasapp.shoppinglist.data.ShoppingListAdapter
 import com.example.listadecomprasapp.shoppinglist.data.OnListClickListener
+import com.example.listadecomprasapp.shoppinglist.data.ShoppingListDAO
 import com.example.listadecomprasapp.shoppinglist.data.model.ShoppingListModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ListsHomeActivity : AppCompatActivity(), OnListClickListener {
 
     private lateinit var binding: ActivityListsHomeBinding
     private lateinit var shoppingListAdapter: ShoppingListAdapter
+
+    @Inject
+    lateinit var shoppingListDAO: ShoppingListDAO
+    @Inject
+    lateinit var loginRepository: LoginRepository
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,14 +33,8 @@ class ListsHomeActivity : AppCompatActivity(), OnListClickListener {
         setContentView(binding.root)
 
         binding.itemsList.layoutManager = GridLayoutManager(this, 2)
-        shoppingListAdapter = ShoppingListAdapter(this)
+        shoppingListAdapter = ShoppingListAdapter(shoppingListDAO, loginRepository, this)
         binding.itemsList.adapter = shoppingListAdapter
-
-        binding.addButton.setOnClickListener {
-            val newIdList = shoppingListAdapter.itemCount + 1;
-            val newList = ShoppingListModel(id = newIdList, name = "Item de Exemplo " + newIdList)
-            shoppingListAdapter.addItem(newList)
-        }
 
         binding.addList.setOnClickListener {
             val intent = Intent(

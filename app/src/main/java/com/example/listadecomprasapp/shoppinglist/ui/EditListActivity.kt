@@ -3,7 +3,9 @@ package com.example.listadecomprasapp.shoppinglist.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listadecomprasapp.databinding.ActivityEditListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EditListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditListBinding

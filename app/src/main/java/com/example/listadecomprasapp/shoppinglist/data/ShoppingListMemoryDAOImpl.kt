@@ -23,11 +23,27 @@ class ShoppingListMemoryDAOImpl : ShoppingListDAO {
         return itemList.find { it.id == itemId }
     }
 
-    override fun addShoppingList(list: ShoppingListModel) {
-        shoppingList.add(list)
+    override fun addShoppingList(list: ShoppingListModel) : Int {
+        val id = shoppingList.size + 1
+        val newList = list.copy(id = id)
+        shoppingList.add(newList)
+
+        return id;
     }
 
-    override fun addShoppingItem(item: ShoppingItemModel) {
-        itemList.add(item)
+    override fun addShoppingItem(item: ShoppingItemModel) : Int {
+        val id = itemList.size + 1
+        val newItem = item.copy(id = id)
+        itemList.add(newItem)
+
+        return id;
+    }
+
+    override fun getItemsCount(listId: Int): Int {
+        return itemList.count { it.listId == listId }
+    }
+
+    override fun getListsCount(userId: Int): Int {
+        return shoppingList.count { it.userId == userId }
     }
 }

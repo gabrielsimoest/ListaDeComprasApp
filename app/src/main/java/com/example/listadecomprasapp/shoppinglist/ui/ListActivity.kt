@@ -9,13 +9,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listadecomprasapp.databinding.ActivityListsHomeBinding
 import com.example.listadecomprasapp.shoppinglist.data.ShoppingItemAdapter
 import com.example.listadecomprasapp.shoppinglist.data.OnItemClickListener
+import com.example.listadecomprasapp.shoppinglist.data.ShoppingListDAO
 import com.example.listadecomprasapp.shoppinglist.data.model.ShoppingItemModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ListActivity : AppCompatActivity(), OnItemClickListener {
-    private var id: Int? = null
+    private var listId: Int? = null
     private lateinit var binding: ActivityListsHomeBinding
     private lateinit var shoppingItemAdapter: ShoppingItemAdapter
 
+    @Inject
+    lateinit var shoppingListDAO: ShoppingListDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +31,6 @@ class ListActivity : AppCompatActivity(), OnItemClickListener {
         setContentView(binding.root)
 
         binding.itemsList.layoutManager = LinearLayoutManager(this)
-        shoppingItemAdapter = ShoppingItemAdapter(this)
-        binding.itemsList.adapter = shoppingItemAdapter
-
-        binding.addButton.setOnClickListener {
-            val newIdList = shoppingItemAdapter.itemCount + 1;
-            val newList = ShoppingItemModel(id = newIdList, name = "Item de Exemplo " + newIdList, description = "Sem descricao")
-            shoppingItemAdapter.addItem(newList)
-        }
 
         binding.addList.setOnClickListener {
             val intent = Intent(
@@ -43,10 +41,11 @@ class ListActivity : AppCompatActivity(), OnItemClickListener {
             startActivity(intent)
         }
 
-        id = intent.getIntExtra("Id", 0)
+        listId = intent.getIntExtra("Id", -1)
 
-        if (id != null && id != 0) {
-
+        if (listId != null && listId != -1) {
+            shoppingItemAdapter = ShoppingItemAdapter(shoppingListDAO, listId!!, this)
+            binding.itemsList.adapter = shoppingItemAdapter
         }
     }
 

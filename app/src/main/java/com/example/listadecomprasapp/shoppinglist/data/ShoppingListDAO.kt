@@ -12,7 +12,11 @@ interface ShoppingListDAO {
 
     fun getItem(itemId: Int): ShoppingItemModel?
 
-    fun addShoppingList(list: ShoppingListModel)
+    fun addShoppingList(list: ShoppingListModel) : Int
 
-    fun addShoppingItem(item: ShoppingItemModel)
+    fun addShoppingItem(item: ShoppingItemModel) : Int
+
+    fun getItemsCount(listId: Int) : Int
+
+    fun getListsCount(userId: Int) : Int
 }

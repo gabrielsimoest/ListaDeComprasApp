@@ -22,7 +22,7 @@ abstract class SingletonModules {
 
     @Binds
     @Singleton
-    abstract fun bindShoppingListDAO(shoppingListDAO: ShoppingListMemoryDAOImpl): ShoppingListDAO
+    abstract fun bindShoppingListDAO(shoppingListDAOImpl: ShoppingListMemoryDAOImpl): ShoppingListDAO
 
     companion object {
         @Provides
@@ -33,15 +33,14 @@ abstract class SingletonModules {
 
         @Provides
         @Singleton
-        fun providesLoginRepository(userDAO: UserDAO): LoginRepository {
-            return LoginRepository(userDAO)
+        fun provideShoppingListMemoryDAOImpl(): ShoppingListMemoryDAOImpl {
+            return ShoppingListMemoryDAOImpl()
         }
 
         @Provides
         @Singleton
-        fun provideShoppingListMemoryDAOImpl(): ShoppingListMemoryDAOImpl {
-            return ShoppingListMemoryDAOImpl()
+        fun providesLoginRepository(userDAO: UserDAO): LoginRepository {
+            return LoginRepository(userDAO)
         }
     }
-
 }
