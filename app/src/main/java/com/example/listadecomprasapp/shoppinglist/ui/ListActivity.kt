@@ -36,12 +36,14 @@ class ListActivity : AppCompatActivity(), OnItemClickListener {
             val intent = Intent(
                 this,
                 EditItemActivity::class.java
-            )
+            ).apply {
+                putExtra("listId", listId)
+            }
 
             startActivity(intent)
         }
 
-        listId = intent.getIntExtra("Id", -1)
+        listId = intent.getIntExtra("listId", -1)
 
         if (listId != null && listId != -1) {
             shoppingItemAdapter = ShoppingItemAdapter(shoppingListDAO, listId!!, this)
@@ -49,11 +51,17 @@ class ListActivity : AppCompatActivity(), OnItemClickListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        shoppingItemAdapter.notifyDataSetChanged()
+    }
+
     override fun onItemClick(item: ShoppingItemModel) {
         Toast.makeText(this, "Clicou no item: ${item.name}", Toast.LENGTH_SHORT).show()
 
         val intent = Intent(this, EditItemActivity::class.java).apply {
             putExtra("Id", item.id)
+            putExtra("listId", listId)
         }
 
         startActivity(intent)

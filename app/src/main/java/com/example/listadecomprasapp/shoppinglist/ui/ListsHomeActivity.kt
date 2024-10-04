@@ -22,9 +22,9 @@ class ListsHomeActivity : AppCompatActivity(), OnListClickListener {
 
     @Inject
     lateinit var shoppingListDAO: ShoppingListDAO
+
     @Inject
     lateinit var loginRepository: LoginRepository
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +46,16 @@ class ListsHomeActivity : AppCompatActivity(), OnListClickListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        shoppingListAdapter.notifyDataSetChanged()
+    }
+
     override fun onItemClick(list: ShoppingListModel) {
         Toast.makeText(this, "Clicou na lista: ${list.name}", Toast.LENGTH_SHORT).show()
 
         val intent = Intent(this, ListActivity::class.java).apply {
-            putExtra("Id", list.id)
+            putExtra("listId", list.id)
         }
 
         startActivity(intent)
