@@ -16,13 +16,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Configurando o ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Verifica se o usuário está logado e redireciona para a tela de login se necessário
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
 
-        // RecyclerView para exibir as listas de compras
+        // Configurando o RecyclerView para exibir as listas de compras
         binding.listsRecyclerView.layoutManager = GridLayoutManager(this, 2)
 
         val listasDeCompras = listOf(
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         // Configura o botão flutuante para adicionar uma nova lista
         binding.fab.setOnClickListener {
-
+            // Ação para adicionar uma nova lista
         }
     }
 }
