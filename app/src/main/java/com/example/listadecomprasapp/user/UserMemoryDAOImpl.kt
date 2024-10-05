@@ -9,8 +9,8 @@ class UserMemoryDAOImpl : UserDAO {
         val defaultUser = User(
             id = 1,
             name = "Usuário Padrão",
-            email = "asd",
-            password = "123123"
+            email = "user@user.com",
+            password = "user123"
         )
         userList.add(defaultUser)
     }

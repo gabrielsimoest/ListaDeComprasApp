@@ -25,10 +25,11 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
+            android:id="@+id/list_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Minhas Listas"
+            android:text="Minhas Lista"
             android:gravity="center_vertical|start"
             android:textColor="@android:color/white"
             android:textSize="20sp"

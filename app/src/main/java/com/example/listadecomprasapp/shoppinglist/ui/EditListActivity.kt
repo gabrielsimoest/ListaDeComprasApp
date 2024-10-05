@@ -63,12 +63,31 @@ class EditListActivity : AppCompatActivity() {
                     shoppingListDAO.removeShoppingList(listId ?: 0)
                     finish()
                 }
-            } else {
-                binding.btnSalvar.setOnClickListener {
+            }
+
+        binding.btnSalvar.setOnClickListener {
+            val listName = binding.inputNome.text.toString()
+
+            if (listName.isNotBlank()) {
+                if (listId != null && listId != -1) {
+                    val currentListEdit = shoppingListDAO.getList(listId ?: 0)
+
+                    if (currentListEdit != null) {
+                        currentListEdit.name = listName
+                        currentListEdit.imageUrl = selectedImageUri?.toString()
+
+                        shoppingListDAO.updateShoppingList(currentListEdit)
+
+                        Toast.makeText(this, "Lista atualizada com sucesso!", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Lista não encontrada!", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
                     val newList = ShoppingListModel(
                         0,
                         loginRepository.user?.userId ?: 0,
-                        binding.inputNome.text.toString(),
+                        listName,
                         selectedImageUri?.toString()
                     )
 
@@ -76,7 +95,11 @@ class EditListActivity : AppCompatActivity() {
                     Toast.makeText(this, "Lista: ${listId} criada", Toast.LENGTH_SHORT).show()
                     finish()
                 }
+            } else {
+                Toast.makeText(this, "Nome da lista não encontrado!", Toast.LENGTH_SHORT).show()
             }
+        }
+
     }
 
     private fun pickImageFromGallery() {

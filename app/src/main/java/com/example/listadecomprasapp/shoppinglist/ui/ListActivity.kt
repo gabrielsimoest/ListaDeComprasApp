@@ -93,6 +93,7 @@ class ListActivity : AppCompatActivity(), OnItemClickListener {
         val existList = shoppingListDAO.getList(listId ?: 0)
         if(existList != null){
             shoppingItemAdapter.updateItems()
+            binding.listName.setText("Minha lista: " + existList.name)
         }
         else
             finish()
