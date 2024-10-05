@@ -30,6 +30,10 @@ class ListActivity : AppCompatActivity(), OnItemClickListener {
         binding = ActivityListsHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.backButton.setOnClickListener(){
+            finish()
+        }
+
         binding.itemsList.layoutManager = LinearLayoutManager(this)
 
         binding.addList.setOnClickListener {

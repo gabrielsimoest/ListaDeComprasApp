@@ -27,6 +27,10 @@ class EditListActivity : AppCompatActivity() {
         binding = ActivityEditListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.backButton.setOnClickListener(){
+            finish()
+        }
+
         binding.btnSalvar.setOnClickListener(){
             val newList = ShoppingListModel(
                 0,

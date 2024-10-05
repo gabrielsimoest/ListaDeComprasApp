@@ -27,6 +27,10 @@ class EditItemActivity : AppCompatActivity() {
         binding = ActivityEditItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.backButton.setOnClickListener(){
+            finish()
+        }
+
         listId = intent.getIntExtra("listId", -1)
         itemId = intent.getIntExtra("Id", -1)
 

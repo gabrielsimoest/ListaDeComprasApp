@@ -19,8 +19,13 @@ class CreateUserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         binding = ActivityAccountBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.backButton.setOnClickListener(){
+            finish()
+        }
 
         binding.buttonCreateAccount.setOnClickListener(){
             val user = User(

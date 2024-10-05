@@ -32,6 +32,10 @@ class ListsHomeActivity : AppCompatActivity(), OnListClickListener {
         binding = ActivityListsHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.backButton.setOnClickListener(){
+            finish()
+        }
+
         binding.itemsList.layoutManager = GridLayoutManager(this, 2)
         shoppingListAdapter = ShoppingListAdapter(shoppingListDAO, loginRepository, this)
         binding.itemsList.adapter = shoppingListAdapter
