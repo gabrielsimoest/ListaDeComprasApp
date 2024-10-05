@@ -7,5 +7,5 @@ data class ShoppingItemModel(
     var quantity: Double,
     var unit: String,
     var category: String,
-    var checked: Boolean
+    var isChecked: Boolean
 )

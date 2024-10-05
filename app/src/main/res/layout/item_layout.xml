@@ -6,7 +6,6 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <!-- Foto Redonda -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="48dp"
@@ -16,7 +15,6 @@
         android:background="@drawable/icon_background"
         android:scaleType="centerCrop" />
 
-    <!-- Informações -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -41,7 +39,6 @@
             android:textColor="@android:color/darker_gray" />
     </LinearLayout>
 
-    <!-- Checkbox -->
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
