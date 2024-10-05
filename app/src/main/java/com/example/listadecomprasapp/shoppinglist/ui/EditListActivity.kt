@@ -35,52 +35,53 @@ class EditListActivity : AppCompatActivity() {
         binding = ActivityEditListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.backButton.setOnClickListener(){
+        binding.backButton.setOnClickListener() {
             finish()
         }
 
-        binding.btnSalvar.setOnClickListener(){
+        binding.btnSalvar.setOnClickListener() {
             val newList = ShoppingListModel(
                 0,
                 loginRepository.user?.userId ?: 0,
                 binding.inputNome.text.toString()
             )
-        listId = intent.getIntExtra("listId", -1)
+            listId = intent.getIntExtra("listId", -1)
 
-        binding.btnSelecionarImagem.setOnClickListener {
-            pickImageFromGallery()
-        }
-
-        if (listId != null && listId != -1) {
-            val currentList = shoppingListDAO.getList(listId ?: 0)
-            binding.inputNome.setText(currentList?.name)
-
-            if (currentList?.imageUrl != null) {
-                Glide.with(binding.selectedImage.context)
-                    .load(currentList.imageUrl)
-                    .into(binding.selectedImage)
-            } else if (selectedImageUri != null) {
-                binding.selectedImage.setImageURI(selectedImageUri)
+            binding.btnSelecionarImagem.setOnClickListener {
+                pickImageFromGallery()
             }
 
-            binding.btnExcluir.visibility = View.VISIBLE
+            if (listId != null && listId != -1) {
+                val currentList = shoppingListDAO.getList(listId ?: 0)
+                binding.inputNome.setText(currentList?.name)
 
-            binding.btnExcluir.setOnClickListener {
-                shoppingListDAO.removeShoppingList(listId ?: 0)
-                finish()
-            }
-        } else {
-            binding.btnSalvar.setOnClickListener {
-                val newList = ShoppingListModel(
-                    0,
-                    loginRepository.user?.userId ?: 0,
-                    binding.inputNome.text.toString(),
-                    selectedImageUri?.toString()
-                )
+                if (currentList?.imageUrl != null) {
+                    Glide.with(binding.selectedImage.context)
+                        .load(currentList.imageUrl)
+                        .into(binding.selectedImage)
+                } else if (selectedImageUri != null) {
+                    binding.selectedImage.setImageURI(selectedImageUri)
+                }
 
-                val listId = shoppingListDAO.addShoppingList(newList)
-                Toast.makeText(this, "Lista: ${listId} criada", Toast.LENGTH_SHORT).show()
-                finish()
+                binding.btnExcluir.visibility = View.VISIBLE
+
+                binding.btnExcluir.setOnClickListener {
+                    shoppingListDAO.removeShoppingList(listId ?: 0)
+                    finish()
+                }
+            } else {
+                binding.btnSalvar.setOnClickListener {
+                    val newList = ShoppingListModel(
+                        0,
+                        loginRepository.user?.userId ?: 0,
+                        binding.inputNome.text.toString(),
+                        selectedImageUri?.toString()
+                    )
+
+                    val listId = shoppingListDAO.addShoppingList(newList)
+                    Toast.makeText(this, "Lista: ${listId} criada", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             }
         }
     }
