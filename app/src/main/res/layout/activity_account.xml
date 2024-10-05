@@ -8,7 +8,7 @@
     tools:context=".account.ui.CreateUserActivity">
 
     <ImageButton
-        android:id="@+id/backButton"
+        android:id="@+id/back_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackgroundBorderless"

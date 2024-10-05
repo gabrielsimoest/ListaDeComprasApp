@@ -8,9 +8,6 @@ class LoginRepository(private val userDAO: UserDAO) {
     var user: LoggedInUser? = null
         private set
 
-    val isLoggedIn: Boolean
-        get() = user != null
-
     init {
         user = null
     }

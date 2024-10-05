@@ -2,6 +2,8 @@ package com.example.listadecomprasapp.shoppinglist.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,7 +34,8 @@ class ListsHomeActivity : AppCompatActivity(), OnListClickListener {
         binding = ActivityListsHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.backButton.setOnClickListener(){
+        binding.logoutButton.setOnClickListener(){
+            loginRepository.logout()
             finish()
         }
 
@@ -48,11 +51,27 @@ class ListsHomeActivity : AppCompatActivity(), OnListClickListener {
 
             startActivity(intent)
         }
+
+        binding.searchBar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                shoppingListAdapter.filter(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
     }
 
     override fun onResume() {
         super.onResume()
-        shoppingListAdapter.notifyDataSetChanged()
+        shoppingListAdapter.updateLists()
     }
 
     override fun onItemClick(list: ShoppingListModel) {

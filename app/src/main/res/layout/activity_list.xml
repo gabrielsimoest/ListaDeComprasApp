@@ -8,51 +8,64 @@
     android:fitsSystemWindows="true"
     tools:context=".shoppinglist.ui.ListActivity">
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Voltar"
-        android:src="@drawable/arrow_back_ios_24px"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#f8856a"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Voltar"
+            android:src="@drawable/arrow_back_ios_24px"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Minhas Listas"
+            android:gravity="center_vertical|start"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:paddingStart="16dp" />
+
+        <ImageButton
+            android:id="@+id/edit_button"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Editar"
+            android:src="@drawable/edit_24px"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="36dp">
+        android:layout_marginTop="?attr/actionBarSize"
+        android:padding="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/search_bar"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Buscar itens"
-                android:padding="10dp"
-                android:background="@android:drawable/edit_text"
-                app:layout_constraintEnd_toStartOf="@+id/edit_button"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintWidth_default="spread" />
+                android:hint="Buscar Itens"
+                android:padding="12dp"
+                android:background="@drawable/rounded_edittext_background"
+                android:layout_marginBottom="16dp"/>
 
-            <ImageButton
-                android:id="@+id/edit_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Editar"
-                android:src="@drawable/edit_24px"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/items_list"

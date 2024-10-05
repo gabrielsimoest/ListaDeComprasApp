@@ -8,50 +8,65 @@
     android:fitsSystemWindows="true"
     tools:context=".shoppinglist.ui.ListsHomeActivity">
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Voltar"
-        android:src="@drawable/arrow_back_ios_24px"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#f8856a"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Minhas Listas"
+            android:gravity="center_vertical|start"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:paddingStart="16dp" />
+
+        <ImageButton
+            android:id="@+id/logout_button"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Voltar"
+            android:src="@drawable/logout_24px"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="36dp">
+        android:layout_marginTop="?attr/actionBarSize"
+    android:padding="16dp">
 
-        <EditText
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Buscar listas"
-            android:padding="10dp"
-            android:background="@android:drawable/edit_text" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/items_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:scrollbars="vertical" />
-
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_list"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_input_add"
-        android:contentDescription="Adicionar Item"
-        app:backgroundTint="#f8856a"
-        app:fabSize="normal" />
+        android:hint="Buscar listas"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext_background"
+        android:layout_marginBottom="16dp"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/items_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        android:layout_marginBottom="16dp" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
+
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+android:id="@+id/add_list"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="bottom|end"
+android:layout_margin="16dp"
+android:src="@android:drawable/ic_input_add"
+android:contentDescription="Adicionar Lista"
+app:backgroundTint="#f8856a"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>

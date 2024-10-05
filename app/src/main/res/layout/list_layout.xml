@@ -11,11 +11,15 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@mipmap/image_not_found"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="8dp"/>
 
     <TextView
         android:id="@+id/item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exemplo de Item" />
+        android:text="Exemplo de Item"
+        android:textSize="18sp"
+        android:textColor="?attr/colorPrimaryDark"/>
+
 </LinearLayout>

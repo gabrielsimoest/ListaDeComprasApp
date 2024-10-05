@@ -39,12 +39,6 @@ class EditListActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnSalvar.setOnClickListener() {
-            val newList = ShoppingListModel(
-                0,
-                loginRepository.user?.userId ?: 0,
-                binding.inputNome.text.toString()
-            )
             listId = intent.getIntExtra("listId", -1)
 
             binding.btnSelecionarImagem.setOnClickListener {
@@ -83,7 +77,6 @@ class EditListActivity : AppCompatActivity() {
                     finish()
                 }
             }
-        }
     }
 
     private fun pickImageFromGallery() {
