@@ -26,13 +26,26 @@ class ShoppingListMemoryDAOImpl : ShoppingListDAO {
             quantity = 2.0,
             unit = "L",
             category = "Bebidas",
-            checked = false
+            isChecked = false
         )
         itemList.add(defaultShoppingItem)
+
+        val defaultShoppingItem2 = ShoppingItemModel(
+            id = itemListSequence++,
+            listId = defaultShoppingList.id,
+            name = "Agua",
+            quantity = 5.0,
+            unit = "L",
+            category = "Bebidas",
+            isChecked = true
+        )
+        itemList.add(defaultShoppingItem2)
     }
 
     override fun getLists(userId: Int): ArrayList<ShoppingListModel> {
-        return shoppingList.filter { it.userId == userId }.toCollection(ArrayList())
+        return shoppingList.filter { it.userId == userId }
+            .sortedBy { it.name  }
+            .toCollection(ArrayList())
     }
 
     override fun getList(listId: Int): ShoppingListModel? {
@@ -40,7 +53,11 @@ class ShoppingListMemoryDAOImpl : ShoppingListDAO {
     }
 
     override fun getItems(listId: Int): ArrayList<ShoppingItemModel> {
-        return itemList.filter { it.listId == listId }.toCollection(ArrayList())
+        return itemList.filter { it.listId == listId }
+            .sortedBy { it.isChecked }
+            .sortedBy { it.category }
+            .sortedBy { it.name }
+            .toCollection(ArrayList())
     }
 
     override fun getItem(itemId: Int): ShoppingItemModel? {

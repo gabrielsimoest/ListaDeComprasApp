@@ -61,7 +61,7 @@ class EditItemActivity : AppCompatActivity() {
                         quantity = quantity,
                         unit = unit,
                         category = category,
-                        checked = false
+                        isChecked = false
                     )
 
                     if (itemId == null || itemId == -1) {
