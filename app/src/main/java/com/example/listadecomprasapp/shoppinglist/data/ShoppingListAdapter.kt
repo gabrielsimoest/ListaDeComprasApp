@@ -3,8 +3,10 @@ package com.example.listadecomprasapp.shoppinglist.data
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.listadecomprasapp.R
 import com.example.listadecomprasapp.account.data.LoginRepository
 import com.example.listadecomprasapp.shoppinglist.data.model.ShoppingListModel
@@ -20,6 +22,12 @@ class ShoppingListAdapter(private val shoppingListDAO: ShoppingListDAO, private 
         val currentItem = shoppingListDAO.getList(id + 1)
         holder.textView.text = currentItem?.name
 
+        currentItem?.imageUrl?.let { imageUrl ->
+            Glide.with(holder.itemView.context)
+                .load(imageUrl)
+                .into(holder.imageView)
+        }
+
         holder.itemView.setOnClickListener {
             if(currentItem != null)
                 listener.onItemClick(currentItem)
@@ -32,5 +40,6 @@ class ShoppingListAdapter(private val shoppingListDAO: ShoppingListDAO, private 
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var textView: TextView = itemView.findViewById(R.id.item_text)
+        var imageView: ImageView = itemView.findViewById(R.id.list_image)
     }
 }

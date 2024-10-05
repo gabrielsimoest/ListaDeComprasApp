@@ -28,7 +28,7 @@
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Buscar itens"
+            android:hint="Buscar listas"
             android:padding="10dp"
             android:background="@android:drawable/edit_text" />
 

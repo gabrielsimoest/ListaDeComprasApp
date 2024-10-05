@@ -5,6 +5,16 @@ import com.example.listadecomprasapp.user.model.User
 class UserMemoryDAOImpl : UserDAO {
     private val userList: MutableList<User> = mutableListOf()
 
+    init {
+        val defaultUser = User(
+            id = 1,
+            name = "Usuário Padrão",
+            email = "asd",
+            password = "123123"
+        )
+        userList.add(defaultUser)
+    }
+
     override fun createUser(user: User): Int {
         if (userList.any { it.email == user.email }) {
             throw IllegalArgumentException("Usuário com o email: ${user.email} já existente!.")

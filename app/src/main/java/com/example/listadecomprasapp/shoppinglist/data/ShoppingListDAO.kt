@@ -16,6 +16,14 @@ interface ShoppingListDAO {
 
     fun addShoppingItem(item: ShoppingItemModel) : Int
 
+    fun removeShoppingList(listId: Int): Boolean
+
+    fun removeShoppingItem(itemId: Int): Boolean
+
+    fun updateShoppingList(list: ShoppingListModel): Boolean
+
+    fun updateShoppingItem(item: ShoppingItemModel): Boolean
+
     fun getItemsCount(listId: Int) : Int
 
     fun getListsCount(userId: Int) : Int

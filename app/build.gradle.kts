@@ -44,6 +44,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.52")
     kapt("com.google.dagger:hilt-android-compiler:2.52")
     implementation("com.google.dagger:hilt-android:2.52")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    kapt("com.github.bumptech.glide:compiler:4.12.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
