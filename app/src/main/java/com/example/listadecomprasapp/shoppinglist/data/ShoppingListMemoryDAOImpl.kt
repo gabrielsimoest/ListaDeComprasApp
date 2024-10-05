@@ -5,7 +5,10 @@ import com.example.listadecomprasapp.shoppinglist.data.model.ShoppingListModel
 
 class ShoppingListMemoryDAOImpl : ShoppingListDAO {
     private val shoppingList: MutableList<ShoppingListModel> = mutableListOf()
+    private var shoppingListSequence: Int = 1
+
     private val itemList: MutableList<ShoppingItemModel> = mutableListOf()
+    private var itemListSequence: Int = 1
 
     override fun getLists(userId: Int): ArrayList<ShoppingListModel> {
         return shoppingList.filter { it.userId == userId }.toCollection(ArrayList())
@@ -24,19 +27,40 @@ class ShoppingListMemoryDAOImpl : ShoppingListDAO {
     }
 
     override fun addShoppingList(list: ShoppingListModel) : Int {
-        val id = shoppingList.size + 1
+        val id = shoppingListSequence++
         val newList = list.copy(id = id)
         shoppingList.add(newList)
 
-        return id;
+        return id
     }
 
     override fun addShoppingItem(item: ShoppingItemModel) : Int {
-        val id = itemList.size + 1
+        val id = itemListSequence++
         val newItem = item.copy(id = id)
         itemList.add(newItem)
 
-        return id;
+        return id
+    }
+
+    override fun removeShoppingList(listId: Int): Boolean {
+        val listToRemove = shoppingList.find { it.id == listId }
+        return if (listToRemove != null) {
+            shoppingList.remove(listToRemove)
+            itemList.removeIf { it.listId == listId }
+            true
+        } else {
+            false
+        }
+    }
+
+    override fun removeShoppingItem(itemId: Int): Boolean {
+        val itemToRemove = itemList.find { it.id == itemId }
+        return if (itemToRemove != null) {
+            itemList.remove(itemToRemove)
+            true
+        } else {
+            false
+        }
     }
 
     override fun getItemsCount(listId: Int): Int {
@@ -45,5 +69,25 @@ class ShoppingListMemoryDAOImpl : ShoppingListDAO {
 
     override fun getListsCount(userId: Int): Int {
         return shoppingList.count { it.userId == userId }
+    }
+
+    override fun updateShoppingList(list: ShoppingListModel): Boolean {
+        val index = shoppingList.indexOfFirst { it.id == list.id }
+        return if (index != -1) {
+            shoppingList[index] = list
+            true
+        } else {
+            false
+        }
+    }
+
+    override fun updateShoppingItem(item: ShoppingItemModel): Boolean {
+        val index = itemList.indexOfFirst { it.id == item.id }
+        return if (index != -1) {
+            itemList[index] = item
+            true
+        } else {
+            false
+        }
     }
 }

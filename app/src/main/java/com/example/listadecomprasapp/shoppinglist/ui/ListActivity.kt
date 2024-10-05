@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.listadecomprasapp.databinding.ActivityListBinding
 import com.example.listadecomprasapp.databinding.ActivityListsHomeBinding
 import com.example.listadecomprasapp.shoppinglist.data.ShoppingItemAdapter
 import com.example.listadecomprasapp.shoppinglist.data.OnItemClickListener
@@ -17,7 +18,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ListActivity : AppCompatActivity(), OnItemClickListener {
     private var listId: Int? = null
-    private lateinit var binding: ActivityListsHomeBinding
+    private lateinit var binding: ActivityListBinding
     private lateinit var shoppingItemAdapter: ShoppingItemAdapter
 
     @Inject
@@ -27,27 +28,41 @@ class ListActivity : AppCompatActivity(), OnItemClickListener {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityListsHomeBinding.inflate(layoutInflater)
+        binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.itemsList.layoutManager = LinearLayoutManager(this)
 
-        binding.addList.setOnClickListener {
-            val intent = Intent(
-                this,
-                EditItemActivity::class.java
-            ).apply {
-                putExtra("listId", listId)
-            }
 
-            startActivity(intent)
-        }
 
         listId = intent.getIntExtra("listId", -1)
 
         if (listId != null && listId != -1) {
             shoppingItemAdapter = ShoppingItemAdapter(shoppingListDAO, listId!!, this)
             binding.itemsList.adapter = shoppingItemAdapter
+
+
+            binding.editButton.setOnClickListener {
+                val intent = Intent(
+                    this,
+                    EditListActivity::class.java
+                ).apply {
+                    putExtra("listId", listId)
+                }
+
+                startActivity(intent)
+            }
+
+            binding.addItem.setOnClickListener {
+                val intent = Intent(
+                    this,
+                    EditItemActivity::class.java
+                ).apply {
+                    putExtra("listId", listId)
+                }
+
+                startActivity(intent)
+            }
         }
     }
 
