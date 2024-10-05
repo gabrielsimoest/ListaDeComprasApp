@@ -33,14 +33,11 @@ class ListActivity : AppCompatActivity(), OnItemClickListener {
 
         binding.itemsList.layoutManager = LinearLayoutManager(this)
 
-
-
         listId = intent.getIntExtra("listId", -1)
 
         if (listId != null && listId != -1) {
             shoppingItemAdapter = ShoppingItemAdapter(shoppingListDAO, listId!!, this)
             binding.itemsList.adapter = shoppingItemAdapter
-
 
             binding.editButton.setOnClickListener {
                 val intent = Intent(
@@ -64,11 +61,18 @@ class ListActivity : AppCompatActivity(), OnItemClickListener {
                 startActivity(intent)
             }
         }
+        else
+            finish()
     }
 
     override fun onResume() {
         super.onResume()
-        shoppingItemAdapter.notifyDataSetChanged()
+
+        val existList = shoppingListDAO.getList(listId ?: 0)
+        if(existList != null)
+            shoppingItemAdapter.notifyDataSetChanged()
+        else
+            finish()
     }
 
     override fun onItemClick(item: ShoppingItemModel) {

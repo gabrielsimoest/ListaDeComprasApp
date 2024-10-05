@@ -70,6 +70,7 @@ class EditListActivity : AppCompatActivity() {
 
                 val listId = shoppingListDAO.addShoppingList(newList)
                 Toast.makeText(this, "Lista: ${listId} criada", Toast.LENGTH_SHORT).show()
+                finish()
             }
         }
     }

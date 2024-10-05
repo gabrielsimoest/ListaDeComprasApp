@@ -1,13 +1,13 @@
 package com.example.listadecomprasapp.shoppinglist.ui
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.listadecomprasapp.account.data.LoginRepository
+import com.example.listadecomprasapp.R
 import com.example.listadecomprasapp.databinding.ActivityEditItemBinding
 import com.example.listadecomprasapp.shoppinglist.data.ShoppingListDAO
 import com.example.listadecomprasapp.shoppinglist.data.model.ShoppingItemModel
-import com.example.listadecomprasapp.shoppinglist.data.model.ShoppingListModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -31,24 +31,57 @@ class EditItemActivity : AppCompatActivity() {
         itemId = intent.getIntExtra("Id", -1)
 
         if (itemId != null && itemId != -1) {
-            val currentItem = shoppingListDAO.getItem(itemId ?: 0);
-            binding.inputNome.setText(currentItem?.name)
-            binding.inputDescricao.setText(currentItem?.description)
+            binding.btnExcluir.visibility = View.VISIBLE
+            binding.btnExcluir.setOnClickListener {
+                shoppingListDAO.removeShoppingItem(itemId ?: 0)
+                finish()
+            }
+
+            val currentItem = shoppingListDAO.getItem(itemId ?: 0)
+            currentItem?.let {
+                binding.inputNome.setText(it.name)
+                binding.inputQuantidade.setText(it.quantity.toString())
+                binding.inputCategoria.setSelection(getCategoryPosition(it.category))
+                binding.inputUnidade.setSelection(getCategoryPosition(it.unit))
+            }
         }
 
-        if (listId != null && listId != -1) {
-            binding.btnSalvar.setOnClickListener() {
-                val newItem = ShoppingItemModel(
-                    0,
-                    listId ?: 0,
-                    binding.inputNome.text.toString(),
-                    binding.inputDescricao.text.toString()
-                )
+        binding.btnSalvar.setOnClickListener {
+            if (listId != null && listId != -1) {
+                val name = binding.inputNome.text.toString()
+                val quantity = binding.inputQuantidade.text.toString().toDoubleOrNull() ?: 0.0
+                val unit = binding.inputUnidade.selectedItem.toString()
+                val category = binding.inputCategoria.selectedItem.toString()
 
-                val listId = shoppingListDAO.addShoppingItem(newItem)
-                Toast.makeText(this, "Item ${listId} criado", Toast.LENGTH_SHORT).show()
+                if (name.isNotEmpty() && unit.isNotEmpty() && category.isNotEmpty()) {
+                    val newItem = ShoppingItemModel(
+                        id = itemId ?: 0,
+                        listId = listId ?: 0,
+                        name = name,
+                        quantity = quantity,
+                        unit = unit,
+                        category = category,
+                        checked = false
+                    )
+
+                    if (itemId == null || itemId == -1) {
+                        shoppingListDAO.addShoppingItem(newItem)
+                        Toast.makeText(this, "Item criado", Toast.LENGTH_SHORT).show()
+                    } else {
+                        shoppingListDAO.updateShoppingItem(newItem)
+                        Toast.makeText(this, "Item atualizado", Toast.LENGTH_SHORT).show()
+                    }
+
+                    finish()
+                } else {
+                    Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
 
+    private fun getCategoryPosition(category: String): Int {
+        val categories = resources.getStringArray(R.array.categorias_array)
+        return categories.indexOf(category).takeIf { it != -1 } ?: 0
+    }
 }

@@ -37,11 +37,11 @@
         android:layout_marginTop="16dp" />
 
     <EditText
-        android:id="@+id/input_descricao"
+        android:id="@+id/input_quantidade"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Nome"
-        android:inputType="text"
+        android:hint="Quantidade"
+        android:inputType="numberDecimal"
         android:padding="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,16 +51,30 @@
         android:layout_marginTop="16dp" />
 
     <Spinner
+        android:id="@+id/input_unidade"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:entries="@array/unidades_array"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/input_quantidade"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="16dp" />
+
+    <Spinner
         android:id="@+id/input_categoria"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_descricao"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp" />
+        android:entries="@array/categorias_array"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/input_unidade"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btn_salvar"
@@ -75,5 +89,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_categoria" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_excluir"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Excluir"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#ff4081"
+        app:layout_constraintTop_toBottomOf="@id/btn_salvar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:elevation="4dp"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,27 @@ class ShoppingListMemoryDAOImpl : ShoppingListDAO {
     private val itemList: MutableList<ShoppingItemModel> = mutableListOf()
     private var itemListSequence: Int = 1
 
+    init {
+        val defaultShoppingList = ShoppingListModel(
+            id = shoppingListSequence++,
+            userId = 1,
+            name = "Supermercado",
+            imageUrl = null
+        )
+        shoppingList.add(defaultShoppingList)
+
+        val defaultShoppingItem = ShoppingItemModel(
+            id = itemListSequence++,
+            listId = defaultShoppingList.id,
+            name = "Leite",
+            quantity = 2.0,
+            unit = "L",
+            category = "Bebidas",
+            checked = false
+        )
+        itemList.add(defaultShoppingItem)
+    }
+
     override fun getLists(userId: Int): ArrayList<ShoppingListModel> {
         return shoppingList.filter { it.userId == userId }.toCollection(ArrayList())
     }

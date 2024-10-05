@@ -4,5 +4,8 @@ data class ShoppingItemModel(
     val id: Int,
     val listId: Int,
     var name: String,
-    var description: String
+    var quantity: Double,
+    var unit: String,
+    var category: String,
+    var checked: Boolean
 )
